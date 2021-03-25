@@ -12,17 +12,14 @@ const StyledSlider = styled.div`
   margin: 0 auto;
 `
 
-function Slider({ formatFn = (num) => num.toFixed(0) }) {
+function Slider({ activeLayer, formatFn = (num) => num.toFixed(0) }) {
   let { state } = useContext(GradientContext)
   const sliderRef = useRef()
 
-  const getActiveLayer = () =>
-    state.layers.find((layer) => layer.id === state.activeTab)
-
   return (
     <StyledSlider ref={sliderRef}>
-      {getActiveLayer()
-        .thumbValues.sort((a, b) => a.stop - b.stop)
+      {activeLayer.thumbValues
+        .sort((a, b) => a.stop - b.stop)
         .map((val) => (
           <SliderThumb
             key={val.id}
@@ -39,9 +36,3 @@ function Slider({ formatFn = (num) => num.toFixed(0) }) {
 }
 
 export default Slider
-
-/**
- * clientX - horizontal coordinate relative to the window
- * getBoundingClientRect().left - horizontal coordinate for element starting point relative to window
- * offsetWidth - provides full width of element including borders
- */

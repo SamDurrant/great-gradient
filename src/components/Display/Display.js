@@ -14,7 +14,7 @@ function Display() {
   let { state } = useContext(GradientContext)
 
   const getActiveLayer = () => {
-    if (state.activeTab === 'All') return state.layers
+    if (state.activeTab === 'All' || state.showAllLayers) return state.layers
     return state.layers.filter((layer) => layer.id === state.activeTab)
   }
 
@@ -25,7 +25,7 @@ function Display() {
         const stops = layer.thumbValues
           .map((val) => `${val.color} ${val.stop}%`)
           .join(', ')
-        return `linear-gradient(90deg, ${stops}) ${layer.position} no-repeat`
+        return `linear-gradient(${layer.degrees}deg, ${stops}) ${layer.position} no-repeat`
       })
   }
 

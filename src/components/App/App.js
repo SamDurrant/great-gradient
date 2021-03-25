@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { GradientContext } from '../../context/GradientContext'
 import Button from '../Button/Button'
 import Display from '../Display/Display'
-import Slider from '../Slider/Slider'
+import DisplayControls from '../DisplayControls/DisplayControls'
 import Tabs from '../Tabs/Tabs'
 import './App.css'
 
@@ -22,7 +22,7 @@ function App() {
         <Button solid text={'+'} onClick={addNewTab} />
       </div>
       <Display />
-      {state.activeLayer !== 'All' ? <Slider /> : ''}
+      {state.activeTab !== 'All' ? <DisplayControls /> : ''}
     </div>
   )
 }

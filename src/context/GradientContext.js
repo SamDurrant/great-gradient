@@ -9,6 +9,7 @@ let initialState = {
   layers: [
     {
       id: 1,
+      degrees: 90,
       thumbValues: [
         { id: 1, color: '#ffffff', stop: 0 },
         { id: 2, color: '#343434', stop: 100 },
@@ -17,6 +18,7 @@ let initialState = {
     },
     {
       id: 2,
+      degrees: 75,
       thumbValues: [
         { id: 1, color: '#a30000', stop: 0 },
         { id: 2, color: '#ee8128', stop: 100 },
@@ -25,6 +27,7 @@ let initialState = {
     },
     {
       id: 3,
+      degrees: 45,
       thumbValues: [
         { id: 1, color: '#00a372', stop: 0 },
         { id: 2, color: '#000ba3', stop: 100 },
@@ -49,6 +52,7 @@ let reducer = (state, action) => {
           ...state.layers,
           {
             id: state.layers.length + 1,
+            degrees: 90,
             thumbValues: [
               { id: 1, color: '#ffffff', stop: 0 },
               { id: 2, color: '#343434', stop: 100 },
@@ -56,6 +60,11 @@ let reducer = (state, action) => {
             position: `70% 70% / 250px 250px`,
           },
         ],
+      }
+    case 'TOGGLE-ALL-LAYERS':
+      return {
+        ...state,
+        showAllLayers: !state.showAllLayers,
       }
     case 'UPDATE-GRADIENT-VAL':
       return {
@@ -70,6 +79,18 @@ let reducer = (state, action) => {
                     ? val
                     : { ...val, stop: parseInt(action.payload.new) }
                 ),
+              }
+        ),
+      }
+    case 'UPDATE-DEGREE-VAL':
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id !== state.activeTab
+            ? layer
+            : {
+                ...layer,
+                degrees: parseInt(action.payload.new),
               }
         ),
       }
