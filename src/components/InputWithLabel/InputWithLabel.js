@@ -15,7 +15,7 @@ const StyledLabel = styled.label`
 `
 
 const StyledInput = styled.input`
-  width: 10rem;
+  width: 8rem;
   border: 0.5px solid #99bdb8;
   border-radius: 1.2rem;
   background-color: var(--color-light);
@@ -38,6 +38,16 @@ const StyledInput = styled.input`
     color: #555;
     letter-spacing: 1px;
   }
+
+  &[type='color'] {
+    border: none;
+    border-radius: 0;
+    background-color: none;
+    padding: 0;
+  }
+  &[type='color']::focus {
+    border-radius: none;
+  }
 `
 
 const InputWithLabel = ({
@@ -50,6 +60,8 @@ const InputWithLabel = ({
   name,
   placeholderText,
   hideLabel,
+  min,
+  max,
   inputMargin = `0.3rem auto 1rem`,
 }) => {
   const inputRef = useRef()
@@ -72,6 +84,8 @@ const InputWithLabel = ({
         placeholder={placeholderText}
         onChange={onInputChange}
         margin={inputMargin}
+        min={min}
+        max={max}
       />
     </StyledWrapper>
   )

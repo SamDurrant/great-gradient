@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { GradientContext } from '../../context/GradientContext'
+import ColorStopList from '../ColorStopList/ColorStopList'
 import InputWithLabel from '../InputWithLabel/InputWithLabel'
 import Knob from '../Knob/Knob'
 import Slider from '../Slider/Slider'
@@ -29,6 +30,7 @@ export default function DisplayControls() {
         labelText="show all layers"
         name="show-layers"
       />
+      <ColorStopList colorStops={getActiveLayer().thumbValues} />
     </div>
   )
 }

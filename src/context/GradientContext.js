@@ -94,6 +94,40 @@ let reducer = (state, action) => {
               }
         ),
       }
+    case 'UPDATE-COLOR-VAL':
+      console.log(action.payload)
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id !== state.activeTab
+            ? layer
+            : {
+                ...layer,
+                thumbValues: layer.thumbValues.map((tv) =>
+                  tv.id !== action.payload.colorid
+                    ? tv
+                    : { ...tv, color: action.payload.color }
+                ),
+              }
+        ),
+      }
+    case 'UPDATE-COLOR-STOP':
+      console.log(action.payload)
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id !== state.activeTab
+            ? layer
+            : {
+                ...layer,
+                thumbValues: layer.thumbValues.map((tv) =>
+                  tv.id !== action.payload.colorid
+                    ? tv
+                    : { ...tv, stop: action.payload.stop }
+                ),
+              }
+        ),
+      }
     default:
       return { ...state }
   }

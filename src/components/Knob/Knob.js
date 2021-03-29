@@ -4,6 +4,7 @@ import './Knob.css'
 import gsap from 'gsap'
 import Draggable from 'gsap/Draggable'
 import { GradientContext } from '../../context/GradientContext'
+import InputWithLabel from '../InputWithLabel/InputWithLabel'
 
 const StyledKnob = styled.div`
   background: var(--color-green);
@@ -19,20 +20,22 @@ const StyledNotch = styled.div`
   margin: 0 auto;
 `
 
-const StyledDegrees = styled.div`
-  font-size: 20px;
-  color: white;
-  margin-left: 15px;
-`
-
 gsap.registerPlugin(Draggable)
 
 export default function Knob({ activeLayer }) {
   const { dispatch } = useContext(GradientContext)
   const [init, setInit] = useState(true)
-  const degrees = useRef(null)
   const dragInstance = useRef(null)
   const dragTarget = useRef(null)
+
+  const handleDegreeInput = (e) => {
+    let rotation = e.target.value < 0 ? 359 : parseInt(e.target.value % 360, 10)
+    setInit(true)
+    dispatch({
+      type: 'UPDATE-DEGREE-VAL',
+      payload: { id: activeLayer.id, new: rotation },
+    })
+  }
 
   useEffect(() => {
     if (init) {
@@ -48,7 +51,6 @@ export default function Knob({ activeLayer }) {
       rotation: 90,
       onDrag: function () {
         let rotation = parseInt(this.rotation % 360, 10)
-        degrees.current.textContent = rotation < 0 ? rotation + 360 : rotation
         dispatch({
           type: 'UPDATE-DEGREE-VAL',
           payload: { id: activeLayer.id, new: rotation },
@@ -62,7 +64,16 @@ export default function Knob({ activeLayer }) {
       <StyledKnob className="draggable" ref={dragTarget}>
         <StyledNotch></StyledNotch>
       </StyledKnob>
-      <StyledDegrees ref={degrees}>{activeLayer.degrees}</StyledDegrees>
+      <div>
+        <InputWithLabel
+          id="degree-input"
+          value={activeLayer.degrees}
+          type="number"
+          onInputChange={handleDegreeInput}
+          hideLabel={true}
+          inputMargin="0 0 0 15px"
+        />
+      </div>
     </div>
   )
 }

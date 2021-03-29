@@ -23,6 +23,7 @@ function Display() {
       .sort((a, b) => b.id - a.id)
       .map((layer) => {
         const stops = layer.thumbValues
+          .sort((a, b) => a.stop - b.stop)
           .map((val) => `${val.color} ${val.stop}%`)
           .join(', ')
         return `linear-gradient(${layer.degrees}deg, ${stops}) ${layer.position} no-repeat`
