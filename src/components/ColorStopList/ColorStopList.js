@@ -1,23 +1,23 @@
 import React, { useContext } from 'react'
 import InputWithLabel from '../InputWithLabel/InputWithLabel'
 import { GradientContext } from '../../context/GradientContext'
+import './ColorStopList.css'
 
 export default function ColorStopList({ colorStops }) {
   const { dispatch } = useContext(GradientContext)
 
-  const handleColorValue = (e) => {
+  const handleColorValue = (e, colorid) => {
     dispatch({
       type: 'UPDATE-COLOR-VAL',
-      payload: { colorid: parseInt(e.target.id), color: e.target.value },
+      payload: { colorid: parseInt(colorid), color: e.target.value },
     })
   }
 
-  const handleColorStop = (e) => {
-    console.log(e.target.value, e.target.id)
+  const handleColorStop = (e, colorid) => {
     dispatch({
       type: 'UPDATE-COLOR-STOP',
       payload: {
-        colorid: parseInt(e.target.id),
+        colorid: parseInt(colorid),
         stop: parseInt(e.target.value),
       },
     })
@@ -25,22 +25,23 @@ export default function ColorStopList({ colorStops }) {
 
   return (
     <div>
-      <h3>Color Stops:</h3>
       {colorStops.map((color) => (
-        <div key={color.id} style={{ display: 'flex', alignItems: 'center' }}>
+        <div key={color.id} className="color-stop">
           <InputWithLabel
-            id={color.id}
+            id="color"
+            labelid="color"
             value={color.color}
             type="color"
             labelText={color.color}
-            onInputChange={handleColorValue}
+            onInputChange={(e) => handleColorValue(e, color.id)}
           />
           <InputWithLabel
-            id={color.id}
+            id="stop"
+            labelid="stop"
             value={color.stop}
             type="number"
             labelText={'stop'}
-            onInputChange={handleColorStop}
+            onInputChange={(e) => handleColorStop(e, color.id)}
             min={0}
             max={100}
           />

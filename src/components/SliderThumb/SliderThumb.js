@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import { GradientContext } from '../../context/GradientContext'
 
 const StyledThumb = styled.div`
-  width: 10px;
+  width: 12px;
   height: 25px;
   border-radius: 3px;
   position: absolute;
   top: -5px;
-  border: 2px solid var(--color-green);
+  border: 1px solid #242424;
   cursor: pointer;
 `
 
@@ -19,7 +19,8 @@ const ThumbLabel = styled.span`
   width: 30px;
   text-align: center;
   font-weight: bold;
-  color: #ffffff;
+  color: #242424;
+  user-select: none;
 `
 
 const getPercent = (value, max) => (100 * value) / max
@@ -34,10 +35,7 @@ function SliderThumb({ sliderRef, formatFn, initialValue, color, max, id }) {
   const diff = useRef()
   const initialPercent = getPercent(initialValue, max)
 
-  const handleMouseMove = (e) => {
-    let newThumbX =
-      e.clientX - diff.current - sliderRef.current.getBoundingClientRect().left
-
+  const updateMoveEvent = (newThumbX) => {
     // calc start and end of slider range
     const end = sliderRef.current.offsetWidth
     const start = 0
@@ -60,6 +58,15 @@ function SliderThumb({ sliderRef, formatFn, initialValue, color, max, id }) {
     thumbLabelRef.current.textContent = formatFn(newValue)
   }
 
+  // MOUSE EVENTS
+
+  const handleMouseMove = (e) => {
+    let newThumbX =
+      e.clientX - diff.current - sliderRef.current.getBoundingClientRect().left
+
+    updateMoveEvent(newThumbX)
+  }
+
   const handleMouseUp = (e) => {
     document.removeEventListener('mouseup', handleMouseUp)
     document.removeEventListener('mousemove', handleMouseMove)
@@ -69,6 +76,30 @@ function SliderThumb({ sliderRef, formatFn, initialValue, color, max, id }) {
     diff.current = e.clientX - thumbRef.current.getBoundingClientRect().left
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseup', handleMouseUp)
+  }
+
+  // TOUCH EVENTS
+
+  const handleTouchMove = (e) => {
+    let newThumbX =
+      e.touches[0].clientX -
+      diff.current -
+      sliderRef.current.getBoundingClientRect().left
+
+    updateMoveEvent(newThumbX)
+  }
+
+  const handleTouchStart = (e) => {
+    console.log('touch')
+    diff.current =
+      e.touches[0].clientX - thumbRef.current.getBoundingClientRect().left
+    document.addEventListener('touchmove', handleTouchMove)
+    document.addEventListener('touchend', handleTouchEnd)
+  }
+
+  const handleTouchEnd = (e) => {
+    document.removeEventListener('touchend', handleTouchEnd)
+    document.removeEventListener('touchmove', handleTouchMove)
   }
 
   return (
@@ -83,6 +114,7 @@ function SliderThumb({ sliderRef, formatFn, initialValue, color, max, id }) {
         style={{ left: getLeftCss(initialPercent, 5), background: color }}
         ref={thumbRef}
         onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
       />
     </Fragment>
   )

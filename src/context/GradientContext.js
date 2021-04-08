@@ -11,7 +11,7 @@ let initialState = {
       id: 1,
       degrees: 90,
       thumbValues: [
-        { id: 1, color: '#ffffff', stop: 0 },
+        { id: 1, color: '#FFFFFF', stop: 0 },
         { id: 2, color: '#343434', stop: 100 },
       ],
       position: `10% 10% / 250px 250px`,
@@ -20,8 +20,8 @@ let initialState = {
       id: 2,
       degrees: 75,
       thumbValues: [
-        { id: 1, color: '#a30000', stop: 0 },
-        { id: 2, color: '#ee8128', stop: 100 },
+        { id: 1, color: '#A30000', stop: 0 },
+        { id: 2, color: '#EE8128', stop: 100 },
       ],
       position: `30% 30% / 250px 250px`,
     },
@@ -29,8 +29,9 @@ let initialState = {
       id: 3,
       degrees: 45,
       thumbValues: [
-        { id: 1, color: '#00a372', stop: 0 },
-        { id: 2, color: '#000ba3', stop: 100 },
+        { id: 1, color: '#00A372', stop: 0 },
+        { id: 2, color: '#A30000', stop: 50 },
+        { id: 3, color: '#000BA3', stop: 100 },
       ],
       position: `50% 50% / 250px 250px`,
     },
@@ -95,7 +96,6 @@ let reducer = (state, action) => {
         ),
       }
     case 'UPDATE-COLOR-VAL':
-      console.log(action.payload)
       return {
         ...state,
         layers: state.layers.map((layer) =>
@@ -106,13 +106,12 @@ let reducer = (state, action) => {
                 thumbValues: layer.thumbValues.map((tv) =>
                   tv.id !== action.payload.colorid
                     ? tv
-                    : { ...tv, color: action.payload.color }
+                    : { ...tv, color: action.payload.color.toUpperCase() }
                 ),
               }
         ),
       }
     case 'UPDATE-COLOR-STOP':
-      console.log(action.payload)
       return {
         ...state,
         layers: state.layers.map((layer) =>

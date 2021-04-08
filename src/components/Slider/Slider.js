@@ -6,10 +6,10 @@ import SliderThumb from '../SliderThumb/SliderThumb'
 const StyledSlider = styled.div`
   position: relative;
   border-radius: 3px;
-  background: #ededed;
+  background: #3d5a80;
   height: 15px;
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 4rem;
 `
 
 function Slider({ activeLayer, formatFn = (num) => num.toFixed(0) }) {

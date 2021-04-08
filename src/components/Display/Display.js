@@ -2,9 +2,10 @@ import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { GradientContext } from '../../context/GradientContext'
+import { createBgGradient } from '../../utilities/utility-fn'
 
 const StyledDisplay = styled.div`
-  border: 2px solid #7ba123;
+  border: 2px solid #3d5a80;
   width: 90%;
   height: 40vh;
   margin: 2rem auto;
@@ -18,22 +19,10 @@ function Display() {
     return state.layers.filter((layer) => layer.id === state.activeTab)
   }
 
-  const createBackgroundGradient = (layers) => {
-    return layers
-      .sort((a, b) => b.id - a.id)
-      .map((layer) => {
-        const stops = layer.thumbValues
-          .sort((a, b) => a.stop - b.stop)
-          .map((val) => `${val.color} ${val.stop}%`)
-          .join(', ')
-        return `linear-gradient(${layer.degrees}deg, ${stops}) ${layer.position} no-repeat`
-      })
-  }
-
   return (
     <StyledDisplay
       style={{
-        background: createBackgroundGradient(getActiveLayer()),
+        background: createBgGradient(getActiveLayer()),
       }}
     ></StyledDisplay>
   )

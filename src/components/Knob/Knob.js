@@ -7,7 +7,7 @@ import { GradientContext } from '../../context/GradientContext'
 import InputWithLabel from '../InputWithLabel/InputWithLabel'
 
 const StyledKnob = styled.div`
-  background: var(--color-green);
+  background: #3d5a80;
   border-radius: 50%;
   width: 75px;
   height: 75px;
@@ -16,7 +16,7 @@ const StyledKnob = styled.div`
 const StyledNotch = styled.div`
   height: 50%;
   width: 3px;
-  background: #000;
+  background: #f8f9fa;
   margin: 0 auto;
 `
 

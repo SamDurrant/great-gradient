@@ -3,35 +3,41 @@ import styled from 'styled-components'
 
 const StyledWrapper = styled.div`
   width: fit-content;
-  margin: 0.5rem auto;
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
 `
 
 const StyledLabel = styled.label`
-  color: var(--color-light);
+  width: 4rem;
+  color: #242424;
   display: block;
-  margin-left: 1rem;
+  margin-right: 1rem;
   letter-spacing: 1px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: right;
+  cursor: pointer;
 `
 
 const StyledInput = styled.input`
-  width: 8rem;
-  border: 0.5px solid #99bdb8;
-  border-radius: 1.2rem;
-  background-color: var(--color-light);
-  color: #333;
+  width: 4rem;
+  border: none;
+  border-bottom: 0.5px solid #3d5a80;
+  background: none;
+  color: #242424;
   font-size: 1rem;
-  letter-spacing: 1px;
-  padding: 0.5rem 1rem;
+  text-align: center;
+  padding: 2px 6px;
   margin: ${(props) => props.margin};
   font-weight: 500;
+  position: relative;
 
   &:focus {
-    border-radius: 1.2rem;
     outline: none;
-    -webkit-box-shadow: 0px 0px 4px 4px rgba(246, 189, 96, 0.7);
-    -moz-box-shadow: 0px 0px 4px 4px rgba(246, 189, 96, 0.7);
-    box-shadow: 0px 0px 4px 4px rgba(246, 189, 96, 0.7);
+    box-shadow: 0px 0px 4px 4px rgba(61, 90, 128, 0.7);
   }
 
   &::placeholder {
@@ -44,8 +50,26 @@ const StyledInput = styled.input`
     border-radius: 0;
     background-color: none;
     padding: 0;
+    &::before {
+      content: '';
+      background: ${(props) => props.value};
+      width: inherit;
+      height: inherit;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
   }
   &[type='color']::focus {
+    border-radius: none;
+  }
+  &[type='checkbox'] {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  &[type='checkbox']::focus {
     border-radius: none;
   }
 `
@@ -62,7 +86,8 @@ const InputWithLabel = ({
   hideLabel,
   min,
   max,
-  inputMargin = `0.3rem auto 1rem`,
+  inputMargin = `0.3rem auto`,
+  ...props
 }) => {
   const inputRef = useRef()
 
@@ -86,6 +111,7 @@ const InputWithLabel = ({
         margin={inputMargin}
         min={min}
         max={max}
+        {...props}
       />
     </StyledWrapper>
   )

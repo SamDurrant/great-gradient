@@ -1,11 +1,11 @@
 import React from 'react'
 import './Button.css'
 
-function Button({ className, text, small, solid, ...props }) {
+function Button({ className, text, solid, transparent, ...props }) {
   const classes = [
     'Button',
-    small && 'Button-small',
     solid && 'Button-solid',
+    transparent && 'Button-transparent',
     className,
   ]
     .filter(Boolean)

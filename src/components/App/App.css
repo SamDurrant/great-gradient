@@ -4,9 +4,10 @@
   justify-content: flex-start;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding: 2rem 0;
-  background: #1b2146;
+  background: #f8f9fa;
+  color: #242424;
 }
 
 .tab-container {
@@ -14,4 +15,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #242424;
+}
+
+.tabs-btn {
+  margin-left: 10px;
 }

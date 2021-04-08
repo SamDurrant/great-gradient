@@ -11,10 +11,13 @@ const StyledUl = styled.ul`
 `
 
 const StyledTab = styled.li`
-  background: #ffffff;
-  background: ${(props) => (props.active ? '#7ba123' : '#ffffff')};
-  padding: 5px 10px;
+  background: ${(props) => (props.active ? '#3d5a80' : 'none')};
+  color: ${(props) => (props.active ? '#f8f9fa' : '#242424')};
+  padding: 10px 20px;
+  font-weight: bold;
   margin: 0 15px;
+  cursor: pointer;
+
   &:nth-of-type(1) {
     margin: 0 15px 0 0;
   }

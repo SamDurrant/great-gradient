@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { GradientContext } from '../../context/GradientContext'
+import CheckboxWithLabel from '../CheckboxWithLabel/CheckboxWithLabel'
 import ColorStopList from '../ColorStopList/ColorStopList'
-import InputWithLabel from '../InputWithLabel/InputWithLabel'
 import Knob from '../Knob/Knob'
 import Slider from '../Slider/Slider'
 import './DisplayControls.css'
@@ -22,10 +22,9 @@ export default function DisplayControls() {
     <div className="display-controls">
       <Slider activeLayer={getActiveLayer()} />
       <Knob activeLayer={getActiveLayer()} />
-      <InputWithLabel
+      <CheckboxWithLabel
         id="show-layers"
-        value={state.showAllLayers}
-        type="checkbox"
+        checked={state.showAllLayers}
         onInputChange={toggleAllLayers}
         labelText="show all layers"
         name="show-layers"
