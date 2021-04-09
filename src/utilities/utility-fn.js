@@ -12,3 +12,6 @@ export const createBgGradient = (layers) => {
     })
     .join('')
 }
+
+export const getPercent = (value, max) => (100 * value) / max
+export const getValue = (percent, max) => (max / 100) * percent

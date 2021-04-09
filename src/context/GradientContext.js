@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react'
+import { v4 } from 'uuid'
 
 const GradientContext = createContext()
 
@@ -80,6 +81,21 @@ let reducer = (state, action) => {
                     ? val
                     : { ...val, stop: parseInt(action.payload.new) }
                 ),
+              }
+        ),
+      }
+    case 'ADD-GRADIENT-VAL':
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id !== state.activeTab
+            ? layer
+            : {
+                ...layer,
+                thumbValues: [
+                  ...layer.thumbValues,
+                  { id: v4(), color: '#F8F9FA', stop: action.payload.stop },
+                ],
               }
         ),
       }

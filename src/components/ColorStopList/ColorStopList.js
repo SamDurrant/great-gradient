@@ -9,7 +9,7 @@ export default function ColorStopList({ colorStops }) {
   const handleColorValue = (e, colorid) => {
     dispatch({
       type: 'UPDATE-COLOR-VAL',
-      payload: { colorid: parseInt(colorid), color: e.target.value },
+      payload: { colorid: colorid, color: e.target.value },
     })
   }
 
@@ -17,7 +17,7 @@ export default function ColorStopList({ colorStops }) {
     dispatch({
       type: 'UPDATE-COLOR-STOP',
       payload: {
-        colorid: parseInt(colorid),
+        colorid: colorid,
         stop: parseInt(e.target.value),
       },
     })

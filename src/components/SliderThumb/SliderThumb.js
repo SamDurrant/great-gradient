@@ -1,6 +1,7 @@
 import { Fragment, useRef, useContext } from 'react'
 import styled from 'styled-components'
 import { GradientContext } from '../../context/GradientContext'
+import { getPercent, getValue } from '../../utilities/utility-fn'
 
 const StyledThumb = styled.div`
   width: 12px;
@@ -23,8 +24,6 @@ const ThumbLabel = styled.span`
   user-select: none;
 `
 
-const getPercent = (value, max) => (100 * value) / max
-const getValue = (percent, max) => (max / 100) * percent
 const getLeftCss = (percent, offset) => `calc(${percent}% - ${offset}px)`
 
 function SliderThumb({ sliderRef, formatFn, initialValue, color, max, id }) {
