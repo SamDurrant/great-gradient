@@ -1,4 +1,4 @@
-import { useRef, useContext } from 'react'
+import { useRef, useContext, useState } from 'react'
 import styled from 'styled-components'
 import { GradientContext } from '../../context/GradientContext'
 import SliderThumb from '../SliderThumb/SliderThumb'
@@ -15,10 +15,11 @@ const StyledSlider = styled.div`
 
 function Slider({ activeLayer, formatFn = (num) => num.toFixed(0) }) {
   let { state, dispatch } = useContext(GradientContext)
+  let [lastTap, setLastTap] = useState(0)
   const sliderRef = useRef()
+  let timeout = null
 
-  const addThumb = (e) => {
-    const stop = e.clientX - sliderRef.current.getBoundingClientRect().left
+  const finishAddThumb = (stop) => {
     const newPercentage = getPercent(stop, sliderRef.current.offsetWidth)
     const newValue = getValue(newPercentage, 100)
     dispatch({
@@ -27,8 +28,33 @@ function Slider({ activeLayer, formatFn = (num) => num.toFixed(0) }) {
     })
   }
 
+  const mouseAddThumb = (e) => {
+    const stop = e.clientX - sliderRef.current.getBoundingClientRect().left
+    finishAddThumb(stop)
+  }
+
+  const touchAddThumb = (e) => {
+    let currentTime = new Date().getTime()
+    let tapLength = currentTime - lastTap
+    clearTimeout(timeout)
+    if (tapLength < 500 && tapLength > 0) {
+      e.preventDefault()
+      const stop =
+        e.changedTouches[0].clientX -
+        sliderRef.current.getBoundingClientRect().left
+      finishAddThumb(stop)
+    } else {
+      timeout = setTimeout(() => clearTimeout(timeout), 500)
+    }
+    setLastTap(currentTime)
+  }
+
   return (
-    <StyledSlider ref={sliderRef} onDoubleClick={addThumb}>
+    <StyledSlider
+      ref={sliderRef}
+      onDoubleClick={mouseAddThumb}
+      onTouchEnd={touchAddThumb}
+    >
       {activeLayer.thumbValues
         .sort((a, b) => a.stop - b.stop)
         .map((val) => (

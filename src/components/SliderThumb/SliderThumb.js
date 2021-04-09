@@ -89,7 +89,6 @@ function SliderThumb({ sliderRef, formatFn, initialValue, color, max, id }) {
   }
 
   const handleTouchStart = (e) => {
-    console.log('touch')
     diff.current =
       e.touches[0].clientX - thumbRef.current.getBoundingClientRect().left
     document.addEventListener('touchmove', handleTouchMove)

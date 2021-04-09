@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { GradientContext } from '../../context/GradientContext'
+import Button from '../Button/Button'
 import CheckboxWithLabel from '../CheckboxWithLabel/CheckboxWithLabel'
 import ColorStopList from '../ColorStopList/ColorStopList'
 import Knob from '../Knob/Knob'
@@ -18,9 +19,17 @@ export default function DisplayControls() {
     })
   }
 
+  const addAStop = () => {
+    dispatch({
+      type: 'ADD-GRADIENT-VAL',
+      payload: { stop: 50 },
+    })
+  }
+
   return (
     <div className="display-controls">
       <Slider activeLayer={getActiveLayer()} />
+      <Button text="add a stop" solid onClick={addAStop} />
       <Knob activeLayer={getActiveLayer()} />
       <CheckboxWithLabel
         id="show-layers"
