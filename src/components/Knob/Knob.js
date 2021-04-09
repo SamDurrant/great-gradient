@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import './Knob.css'
-import gsap from 'gsap'
-import Draggable from 'gsap/Draggable'
 import { GradientContext } from '../../context/GradientContext'
 import InputWithLabel from '../InputWithLabel/InputWithLabel'
+import { setDragTarget, setDragInstance } from '../../utilities/animations'
 
 const StyledKnob = styled.div`
   background: #3d5a80;
@@ -19,8 +18,6 @@ const StyledNotch = styled.div`
   background: #f8f9fa;
   margin: 0 auto;
 `
-
-gsap.registerPlugin(Draggable)
 
 export default function Knob({ activeLayer }) {
   const { dispatch } = useContext(GradientContext)
@@ -39,24 +36,21 @@ export default function Knob({ activeLayer }) {
 
   useEffect(() => {
     if (init) {
-      gsap.set(dragTarget.current, { rotation: activeLayer.degrees })
+      setDragTarget(dragTarget.current, activeLayer.degrees)
       setInit(false)
     }
   }, [activeLayer.degrees, init])
 
   useEffect(() => {
     setInit(true)
-    dragInstance.current = Draggable.create(dragTarget.current, {
-      type: 'rotation',
-      rotation: 90,
-      onDrag: function () {
-        let rotation = parseInt(this.rotation % 360, 10)
-        dispatch({
-          type: 'UPDATE-DEGREE-VAL',
-          payload: { id: activeLayer.id, new: rotation },
-        })
-      },
-    })
+    function handleOnDrag(rotate) {
+      let rotation = parseInt(rotate % 360, 10)
+      dispatch({
+        type: 'UPDATE-DEGREE-VAL',
+        payload: { id: activeLayer.id, new: rotation },
+      })
+    }
+    dragInstance.current = setDragInstance(dragTarget.current, handleOnDrag)
   }, [activeLayer.id, dispatch])
 
   return (

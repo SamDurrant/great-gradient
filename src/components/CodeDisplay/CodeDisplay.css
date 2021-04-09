@@ -12,5 +12,26 @@
 }
 
 .code-btn {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-container {
+  position: relative;
+  height: fit-content;
+  width: fit-content;
   margin-left: auto;
+}
+
+.success-message {
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 0;
+  transform: translateY(-25%);
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
 }
