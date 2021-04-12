@@ -5,11 +5,12 @@ const GradientContext = createContext()
 
 let initialState = {
   max: 100,
-  activeTab: 1,
+  activeTab: 'All',
   showAllLayers: false,
   layers: [
     {
-      id: 1,
+      id: v4(),
+      index: 1,
       degrees: 90,
       thumbValues: [
         { id: '1', color: '#FFFFFF', stop: 0 },
@@ -18,7 +19,8 @@ let initialState = {
       position: `10% 10% / 250px 250px`,
     },
     {
-      id: 2,
+      id: v4(),
+      index: 2,
       degrees: 75,
       thumbValues: [
         { id: '1', color: '#A30000', stop: 0 },
@@ -27,7 +29,8 @@ let initialState = {
       position: `30% 30% / 250px 250px`,
     },
     {
-      id: 3,
+      id: v4(),
+      index: 3,
       degrees: 45,
       thumbValues: [
         { id: '1', color: '#00A372', stop: 0 },
@@ -44,16 +47,18 @@ let reducer = (state, action) => {
     case 'SET-ACTIVE-LAYER':
       return {
         ...state,
-        activeTab: action.payload.activeTab,
+        activeTab: action.payload.activeLayer,
       }
     case 'ADD-NEW-LAYER':
+      let newId = v4()
       return {
         ...state,
-        activeTab: state.layers.length + 1,
+        activeTab: newId,
         layers: [
           ...state.layers,
           {
-            id: state.layers.length + 1,
+            id: newId,
+            index: state.layers.length + 1,
             degrees: 90,
             thumbValues: [
               { id: 1, color: '#ffffff', stop: 0 },
@@ -62,6 +67,18 @@ let reducer = (state, action) => {
             position: `70% 70% / 250px 250px`,
           },
         ],
+      }
+    case 'REMOVE-LAYER':
+      let filtered = state.layers
+        .filter((layer) => layer.id !== action.payload.id)
+        .map((layer, i) => {
+          return { ...layer, index: i }
+        })
+      let active = filtered[0].id
+      return {
+        ...state,
+        layers: [...filtered],
+        activeTab: active,
       }
     case 'TOGGLE-ALL-LAYERS':
       return {

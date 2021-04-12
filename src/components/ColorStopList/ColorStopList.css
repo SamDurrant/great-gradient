@@ -19,7 +19,7 @@
   margin-right: 0.5rem;
   visibility: hidden;
   opacity: 0;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s var(--base-ease);
 }
 
 .color-stop-animated:hover .delete-btn {

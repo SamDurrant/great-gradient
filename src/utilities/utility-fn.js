@@ -1,6 +1,6 @@
 export const createBgGradient = (layers) => {
   return layers
-    .sort((a, b) => b.id - a.id)
+    .sort((a, b) => b.index - a.index)
     .map((layer, i) => {
       const stops = layer.thumbValues
         .sort((a, b) => a.stop - b.stop)

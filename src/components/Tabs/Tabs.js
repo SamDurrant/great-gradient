@@ -26,23 +26,25 @@ const StyledTab = styled.li`
 function Tabs() {
   let { state, dispatch } = useContext(GradientContext)
 
-  const changeActiveTab = (tabIndex) => {
+  const changeActiveTab = (id) => {
     dispatch({
       type: 'SET-ACTIVE-LAYER',
-      payload: { activeTab: tabIndex },
+      payload: { activeLayer: id },
     })
   }
 
-  const createTabs = (tabs) => {
-    const userLayers = tabs.map((tab, i) => (
-      <StyledTab
-        key={i}
-        active={state.activeTab === i + 1}
-        onClick={() => changeActiveTab(i + 1)}
-      >
-        {i + 1}
-      </StyledTab>
-    ))
+  const createTabs = (layers) => {
+    const userLayers = layers
+      .sort((a, b) => a.index - b.index)
+      .map((layer, i) => (
+        <StyledTab
+          key={layer.id}
+          active={state.activeTab === layer.id}
+          onClick={() => changeActiveTab(layer.id)}
+        >
+          {i + 1}
+        </StyledTab>
+      ))
     return (
       <Fragment>
         <StyledTab

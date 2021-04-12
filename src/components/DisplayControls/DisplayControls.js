@@ -26,18 +26,33 @@ export default function DisplayControls() {
     })
   }
 
+  const handleRemoveLayer = () => {
+    dispatch({
+      type: 'REMOVE-LAYER',
+      payload: { id: getActiveLayer().id },
+    })
+  }
+
   return (
     <div className="display-controls">
       <Slider activeLayer={getActiveLayer()} />
       <Button text="add a stop" solid onClick={addAStop} />
       <Knob activeLayer={getActiveLayer()} />
-      <CheckboxWithLabel
-        id="show-layers"
-        checked={state.showAllLayers}
-        onInputChange={toggleAllLayers}
-        labelText="show all layers"
-        name="show-layers"
-      />
+      <div className="flex-wrapper">
+        <CheckboxWithLabel
+          id="show-layers"
+          checked={state.showAllLayers}
+          onInputChange={toggleAllLayers}
+          labelText="show all layers"
+          name="show-layers"
+        />
+        <Button
+          text="remove layer"
+          className="btn-margin"
+          transparent
+          onClick={handleRemoveLayer}
+        />
+      </div>
       <ColorStopList colorStops={getActiveLayer().thumbValues} />
     </div>
   )
