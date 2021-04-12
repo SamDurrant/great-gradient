@@ -13,8 +13,8 @@ let initialState = {
       index: 1,
       degrees: 90,
       thumbValues: [
-        { id: '1', color: '#FFFFFF', stop: 0 },
-        { id: '2', color: '#343434', stop: 100 },
+        { id: '1', color: '#FFFFFF', stop: 0, opacity: 1 },
+        { id: '2', color: '#343434', stop: 100, opacity: 1 },
       ],
       position: `10% 10% / 250px 250px`,
     },
@@ -23,8 +23,8 @@ let initialState = {
       index: 2,
       degrees: 75,
       thumbValues: [
-        { id: '1', color: '#A30000', stop: 0 },
-        { id: '2', color: '#EE8128', stop: 100 },
+        { id: '1', color: '#A30000', stop: 0, opacity: 0.5 },
+        { id: '2', color: '#EE8128', stop: 100, opacity: 0.5 },
       ],
       position: `30% 30% / 250px 250px`,
     },
@@ -33,9 +33,9 @@ let initialState = {
       index: 3,
       degrees: 45,
       thumbValues: [
-        { id: '1', color: '#00A372', stop: 0 },
-        { id: '2', color: '#A30000', stop: 50 },
-        { id: '3', color: '#000BA3', stop: 100 },
+        { id: '1', color: '#00A372', stop: 0, opacity: 1 },
+        { id: '2', color: '#A30000', stop: 50, opacity: 0.5 },
+        { id: '3', color: '#000BA3', stop: 100, opacity: 0.8 },
       ],
       position: `50% 50% / 250px 250px`,
     },
@@ -95,7 +95,12 @@ let reducer = (state, action) => {
                 ...layer,
                 thumbValues: [
                   ...layer.thumbValues,
-                  { id: v4(), color: '#F8F9FA', stop: action.payload.stop },
+                  {
+                    id: v4(),
+                    color: '#F8F9FA',
+                    stop: action.payload.stop,
+                    opacity: 1,
+                  },
                 ],
               }
         ),
@@ -154,6 +159,23 @@ let reducer = (state, action) => {
                   tv.id !== action.payload.colorid
                     ? tv
                     : { ...tv, stop: action.payload.stop }
+                ),
+              }
+        ),
+      }
+    case 'UPDATE-OPACITY-VAL':
+      console.log('updating', action.payload)
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id !== state.activeTab
+            ? layer
+            : {
+                ...layer,
+                thumbValues: layer.thumbValues.map((tv) =>
+                  tv.id !== action.payload.colorid
+                    ? tv
+                    : { ...tv, opacity: action.payload.opacity }
                 ),
               }
         ),

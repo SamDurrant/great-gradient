@@ -46,12 +46,14 @@ export default function DisplayControls() {
           labelText="show all layers"
           name="show-layers"
         />
-        <Button
-          text="remove layer"
-          className="btn-margin"
-          transparent
-          onClick={handleRemoveLayer}
-        />
+        {state.layers.length > 1 && (
+          <Button
+            text="remove layer"
+            className="btn-margin"
+            transparent
+            onClick={handleRemoveLayer}
+          />
+        )}
       </div>
       <ColorStopList colorStops={getActiveLayer().thumbValues} />
     </div>

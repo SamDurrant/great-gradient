@@ -37,31 +37,49 @@ export default function ColorStop({ color, colorStopLength }) {
     fadeOut(gradientColor, updateContext)
   }
 
+  const handleOpacityChange = (e) => {
+    console.log(e.target.value)
+    dispatch({
+      type: 'UPDATE-OPACITY-VAL',
+      payload: { colorid: color.id, opacity: parseFloat(e.target.value) },
+    })
+  }
+
   return (
     <div
-      ref={(el) => (gradientColor = el)}
-      className={`color-stop ${
-        colorStopLength > 2 ? 'color-stop-animated' : ''
-      }`}
+      className={`color-stop-wrapper ${colorStopLength > 2 ? 'with-btn' : ''}`}
     >
-      <InputWithLabel
-        id="color"
-        labelid="color"
-        value={color.color}
-        type="color"
-        labelText={color.color}
-        onInputChange={(e) => handleColorValue(e)}
-      />
-      <InputWithLabel
-        id="stop"
-        labelid="stop"
-        value={color.stop}
-        type="number"
-        labelText={'stop'}
-        onInputChange={(e) => handleColorStop(e)}
-        min={0}
-        max={100}
-      />
+      <div ref={(el) => (gradientColor = el)} className="color-stop">
+        <InputWithLabel
+          id="color"
+          labelid="color"
+          value={color.color}
+          type="color"
+          labelText={color.color}
+          onInputChange={handleColorValue}
+        />
+        <InputWithLabel
+          id="stop"
+          labelid="stop"
+          value={color.stop}
+          type="number"
+          labelText={'stop'}
+          onInputChange={handleColorStop}
+          min={0}
+          max={100}
+        />
+        <InputWithLabel
+          id="opacity"
+          labelid="opacity"
+          value={color.opacity}
+          type="number"
+          labelText={'opacity'}
+          onInputChange={handleOpacityChange}
+          min={0}
+          max={1}
+          step={0.1}
+        />
+      </div>
       <Button text="-" className="delete-btn" onClick={handleRemoveColor} />
     </div>
   )
