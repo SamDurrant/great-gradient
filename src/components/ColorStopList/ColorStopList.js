@@ -3,6 +3,7 @@ import InputWithLabel from '../InputWithLabel/InputWithLabel'
 import { GradientContext } from '../../context/GradientContext'
 import './ColorStopList.css'
 import Button from '../Button/Button'
+import ColorStop from './ColorStop'
 
 export default function ColorStopList({ colorStops }) {
   const { dispatch } = useContext(GradientContext)
@@ -34,36 +35,41 @@ export default function ColorStopList({ colorStops }) {
   return (
     <div>
       {colorStops.map((color) => (
-        <div
+        <ColorStop
+          color={color}
+          colorStopLength={colorStops.length}
           key={color.id}
-          className={`color-stop ${
-            colorStops.length > 2 ? 'color-stop-animated' : ''
-          }`}
-        >
-          <InputWithLabel
-            id="color"
-            labelid="color"
-            value={color.color}
-            type="color"
-            labelText={color.color}
-            onInputChange={(e) => handleColorValue(e, color.id)}
-          />
-          <InputWithLabel
-            id="stop"
-            labelid="stop"
-            value={color.stop}
-            type="number"
-            labelText={'stop'}
-            onInputChange={(e) => handleColorStop(e, color.id)}
-            min={0}
-            max={100}
-          />
-          <Button
-            text="-"
-            className="delete-btn"
-            onClick={(e) => handleRemoveColor(e, color.id)}
-          />
-        </div>
+        />
+        // <div
+        //   key={color.id}
+        //   className={`color-stop ${
+        //     colorStops.length > 2 ? 'color-stop-animated' : ''
+        //   }`}
+        // >
+        //   <InputWithLabel
+        //     id="color"
+        //     labelid="color"
+        //     value={color.color}
+        //     type="color"
+        //     labelText={color.color}
+        //     onInputChange={(e) => handleColorValue(e, color.id)}
+        //   />
+        //   <InputWithLabel
+        //     id="stop"
+        //     labelid="stop"
+        //     value={color.stop}
+        //     type="number"
+        //     labelText={'stop'}
+        //     onInputChange={(e) => handleColorStop(e, color.id)}
+        //     min={0}
+        //     max={100}
+        //   />
+        //   <Button
+        //     text="-"
+        //     className="delete-btn"
+        //     onClick={(e) => handleRemoveColor(e, color.id)}
+        //   />
+        // </div>
       ))}
     </div>
   )
