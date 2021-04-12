@@ -21,7 +21,7 @@ export default function DisplayControls() {
 
   const addAStop = () => {
     dispatch({
-      type: 'ADD-GRADIENT-VAL',
+      type: 'ADD-GRADIENT-TO-LAYER',
       payload: { stop: 50 },
     })
   }

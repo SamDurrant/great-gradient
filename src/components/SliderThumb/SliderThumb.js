@@ -49,7 +49,7 @@ function SliderThumb({ sliderRef, formatFn, initialValue, color, max, id }) {
     const newPercentage = getPercent(newThumbX, end)
     const newValue = getValue(newPercentage, max)
     dispatch({
-      type: 'UPDATE-GRADIENT-VAL',
+      type: 'UPDATE-COLOR-STOP',
       payload: { id, new: formatFn(newValue) },
     })
     thumbRef.current.style.left = getLeftCss(newPercentage, 5)

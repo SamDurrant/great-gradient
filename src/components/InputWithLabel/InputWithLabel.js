@@ -46,10 +46,12 @@ const StyledInput = styled.input`
   }
 
   &[type='color'] {
+    width: 2.5rem;
     border: none;
     border-radius: 0;
     background-color: none;
     padding: 0;
+
     &::before {
       content: '';
       background: ${(props) => props.value};
@@ -61,14 +63,17 @@ const StyledInput = styled.input`
       z-index: 2;
     }
   }
+
   &[type='color']::focus {
     border-radius: none;
   }
+
   &[type='checkbox'] {
     border: none;
     border-radius: 0;
     padding: 0;
   }
+
   &[type='checkbox']::focus {
     border-radius: none;
   }

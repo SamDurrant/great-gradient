@@ -12,8 +12,8 @@ let initialState = {
       id: 1,
       degrees: 90,
       thumbValues: [
-        { id: 1, color: '#FFFFFF', stop: 0 },
-        { id: 2, color: '#343434', stop: 100 },
+        { id: '1', color: '#FFFFFF', stop: 0 },
+        { id: '2', color: '#343434', stop: 100 },
       ],
       position: `10% 10% / 250px 250px`,
     },
@@ -21,8 +21,8 @@ let initialState = {
       id: 2,
       degrees: 75,
       thumbValues: [
-        { id: 1, color: '#A30000', stop: 0 },
-        { id: 2, color: '#EE8128', stop: 100 },
+        { id: '1', color: '#A30000', stop: 0 },
+        { id: '2', color: '#EE8128', stop: 100 },
       ],
       position: `30% 30% / 250px 250px`,
     },
@@ -30,9 +30,9 @@ let initialState = {
       id: 3,
       degrees: 45,
       thumbValues: [
-        { id: 1, color: '#00A372', stop: 0 },
-        { id: 2, color: '#A30000', stop: 50 },
-        { id: 3, color: '#000BA3', stop: 100 },
+        { id: '1', color: '#00A372', stop: 0 },
+        { id: '2', color: '#A30000', stop: 50 },
+        { id: '3', color: '#000BA3', stop: 100 },
       ],
       position: `50% 50% / 250px 250px`,
     },
@@ -41,12 +41,12 @@ let initialState = {
 
 let reducer = (state, action) => {
   switch (action.type) {
-    case 'SET-ACTIVE-TAB':
+    case 'SET-ACTIVE-LAYER':
       return {
         ...state,
         activeTab: action.payload.activeTab,
       }
-    case 'ADD-NEW-TAB':
+    case 'ADD-NEW-LAYER':
       return {
         ...state,
         activeTab: state.layers.length + 1,
@@ -68,23 +68,7 @@ let reducer = (state, action) => {
         ...state,
         showAllLayers: !state.showAllLayers,
       }
-    case 'UPDATE-GRADIENT-VAL':
-      return {
-        ...state,
-        layers: state.layers.map((layer) =>
-          layer.id !== state.activeTab
-            ? layer
-            : {
-                ...layer,
-                thumbValues: layer.thumbValues.map((val) =>
-                  val.id !== action.payload.id
-                    ? val
-                    : { ...val, stop: parseInt(action.payload.new) }
-                ),
-              }
-        ),
-      }
-    case 'ADD-GRADIENT-VAL':
+    case 'ADD-GRADIENT-TO-LAYER':
       return {
         ...state,
         layers: state.layers.map((layer) =>
@@ -96,6 +80,20 @@ let reducer = (state, action) => {
                   ...layer.thumbValues,
                   { id: v4(), color: '#F8F9FA', stop: action.payload.stop },
                 ],
+              }
+        ),
+      }
+    case 'REMOVE-GRADIENT-FROM-LAYER':
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id !== state.activeTab
+            ? layer
+            : {
+                ...layer,
+                thumbValues: layer.thumbValues.filter(
+                  (tv) => tv.id !== action.payload.colorid
+                ),
               }
         ),
       }

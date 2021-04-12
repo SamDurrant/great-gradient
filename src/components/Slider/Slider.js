@@ -23,7 +23,7 @@ function Slider({ activeLayer, formatFn = (num) => num.toFixed(0) }) {
     const newPercentage = getPercent(stop, sliderRef.current.offsetWidth)
     const newValue = getValue(newPercentage, 100)
     dispatch({
-      type: 'ADD-GRADIENT-VAL',
+      type: 'ADD-GRADIENT-TO-LAYER',
       payload: { stop: formatFn(newValue) },
     })
   }

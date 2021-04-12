@@ -8,3 +8,21 @@
   border: 1px solid #242424;
   border-radius: 3px;
 }
+
+.delete-btn {
+  background: #a30000;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0px 5px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.color-stop-animated:hover .delete-btn {
+  visibility: visible;
+  opacity: 1;
+}

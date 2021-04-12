@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import InputWithLabel from '../InputWithLabel/InputWithLabel'
 import { GradientContext } from '../../context/GradientContext'
 import './ColorStopList.css'
+import Button from '../Button/Button'
 
 export default function ColorStopList({ colorStops }) {
   const { dispatch } = useContext(GradientContext)
@@ -23,10 +24,22 @@ export default function ColorStopList({ colorStops }) {
     })
   }
 
+  const handleRemoveColor = (e, colorid) => {
+    dispatch({
+      type: 'REMOVE-GRADIENT-FROM-LAYER',
+      payload: { colorid: colorid },
+    })
+  }
+
   return (
     <div>
       {colorStops.map((color) => (
-        <div key={color.id} className="color-stop">
+        <div
+          key={color.id}
+          className={`color-stop ${
+            colorStops.length > 2 ? 'color-stop-animated' : ''
+          }`}
+        >
           <InputWithLabel
             id="color"
             labelid="color"
@@ -44,6 +57,11 @@ export default function ColorStopList({ colorStops }) {
             onInputChange={(e) => handleColorStop(e, color.id)}
             min={0}
             max={100}
+          />
+          <Button
+            text="-"
+            className="delete-btn"
+            onClick={(e) => handleRemoveColor(e, color.id)}
           />
         </div>
       ))}

@@ -28,7 +28,7 @@ function Tabs() {
 
   const changeActiveTab = (tabIndex) => {
     dispatch({
-      type: 'SET-ACTIVE-TAB',
+      type: 'SET-ACTIVE-LAYER',
       payload: { activeTab: tabIndex },
     })
   }

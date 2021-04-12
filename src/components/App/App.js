@@ -12,7 +12,7 @@ function App() {
 
   const addNewTab = () => {
     dispatch({
-      type: 'ADD-NEW-TAB',
+      type: 'ADD-NEW-LAYER',
     })
   }
 
