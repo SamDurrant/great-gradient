@@ -36,7 +36,6 @@ export default function DisplayControls() {
   return (
     <div className="display-controls">
       <Slider activeLayer={getActiveLayer()} />
-      <Button text="add a stop" solid onClick={addAStop} />
       <Knob activeLayer={getActiveLayer()} />
       <div className="flex-wrapper">
         <CheckboxWithLabel
@@ -49,12 +48,18 @@ export default function DisplayControls() {
         {state.layers.length > 1 && (
           <Button
             text="remove layer"
-            className="btn-margin"
+            className="btn-margin-l"
             transparent
             onClick={handleRemoveLayer}
           />
         )}
       </div>
+      <Button
+        text="add a stop"
+        solid
+        onClick={addAStop}
+        className="btn-margin-top"
+      />
       <ColorStopList colorStops={getActiveLayer().thumbValues} />
     </div>
   )

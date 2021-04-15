@@ -5,21 +5,28 @@ const StyledWrapper = styled.div`
   width: fit-content;
   margin: 0.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
   cursor: pointer;
+  @media (min-width: 600px) {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
 `
 
 const StyledLabel = styled.label`
   width: 4rem;
   color: #242424;
   display: block;
-  margin-right: 1rem;
   letter-spacing: 1px;
   font-size: 0.8rem;
   font-weight: bold;
-  text-align: right;
+  text-align: center;
   cursor: pointer;
+  @media (min-width: 600px) {
+    text-align: right;
+    margin-right: 1rem;
+  }
 `
 
 const StyledInput = styled.input`

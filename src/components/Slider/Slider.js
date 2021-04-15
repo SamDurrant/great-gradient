@@ -10,7 +10,7 @@ const StyledSlider = styled.div`
   background: #3d5a80;
   height: 15px;
   width: 90%;
-  margin: 0 auto 4rem;
+  margin: 0 auto 3rem;
 `
 
 function Slider({ activeLayer, formatFn = (num) => num.toFixed(0) }) {

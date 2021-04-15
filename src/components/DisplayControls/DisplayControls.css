@@ -13,7 +13,11 @@
   justify-content: center;
 }
 
-.btn-margin {
+.btn-margin-l {
   margin-left: 2rem;
   border-radius: 3px;
+}
+
+.btn-margin-top {
+  margin-top: 2rem;
 }
