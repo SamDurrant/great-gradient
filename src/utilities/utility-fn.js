@@ -8,9 +8,11 @@ export const createBgGradient = (layers) => {
           (val) => `${makeRgba(hexToRgb(val.color), val.opacity)} ${val.stop}%`
         )
         .join(', ')
-      return `linear-gradient(${layer.degrees}deg, ${stops}) ${
+      return `linear-gradient(${layer.degrees}deg, ${stops}) ${makePosition(
         layer.position
-      } no-repeat${i !== layers.length - 1 ? ', ' : ''}`
+      )} / ${makeSize(layer.size)} no-repeat${
+        i !== layers.length - 1 ? ', ' : ''
+      }`
     })
     .join('')
 }
@@ -31,4 +33,12 @@ export const hexToRgb = (hex) => {
 
 const makeRgba = (color, opacity) => {
   return `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`
+}
+
+const makePosition = (positions) => {
+  return `${positions.x}${positions.unitX} ${positions.y}${positions.unitY}`
+}
+
+const makeSize = (size) => {
+  return `${size.x}${size.unitX} ${size.y}${size.unitY}`
 }

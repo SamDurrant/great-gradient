@@ -4,6 +4,8 @@ import Button from '../Button/Button'
 import CheckboxWithLabel from '../CheckboxWithLabel/CheckboxWithLabel'
 import ColorStopList from '../ColorStopList/ColorStopList'
 import Knob from '../Knob/Knob'
+import PositionControls from '../PositionControls/PositionControls'
+import SizeControls from '../SizeControls/SizeControls'
 import Slider from '../Slider/Slider'
 import './DisplayControls.css'
 
@@ -37,6 +39,8 @@ export default function DisplayControls() {
     <div className="display-controls">
       <Slider activeLayer={getActiveLayer()} />
       <Knob activeLayer={getActiveLayer()} />
+      <PositionControls />
+      <SizeControls />
       <div className="flex-wrapper">
         <CheckboxWithLabel
           id="show-layers"

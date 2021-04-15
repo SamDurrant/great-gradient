@@ -16,7 +16,18 @@ let initialState = {
         { id: '1', color: '#FFFFFF', stop: 0, opacity: 1 },
         { id: '2', color: '#343434', stop: 100, opacity: 1 },
       ],
-      position: `10% 10% / 250px 250px`,
+      position: {
+        x: '20',
+        unitX: '%',
+        y: '20',
+        unitY: '%',
+      },
+      size: {
+        x: '50',
+        unitX: '%',
+        y: '50',
+        unitY: '%',
+      },
     },
     {
       id: v4(),
@@ -26,7 +37,18 @@ let initialState = {
         { id: '1', color: '#A30000', stop: 0, opacity: 0.5 },
         { id: '2', color: '#EE8128', stop: 100, opacity: 0.5 },
       ],
-      position: `30% 30% / 250px 250px`,
+      position: {
+        x: '3',
+        unitX: 'em',
+        y: '3',
+        unitY: 'em',
+      },
+      size: {
+        x: '100',
+        unitX: 'px',
+        y: '100',
+        unitY: 'px',
+      },
     },
     {
       id: v4(),
@@ -37,7 +59,18 @@ let initialState = {
         { id: '2', color: '#A30000', stop: 50, opacity: 0.5 },
         { id: '3', color: '#000BA3', stop: 100, opacity: 0.8 },
       ],
-      position: `50% 50% / 250px 250px`,
+      position: {
+        x: '70',
+        unitX: 'px',
+        y: '70',
+        unitY: 'px',
+      },
+      size: {
+        x: '30',
+        unitX: 'rem',
+        y: '30',
+        unitY: '%',
+      },
     },
   ],
 }
@@ -61,10 +94,21 @@ let reducer = (state, action) => {
             index: state.layers.length + 1,
             degrees: 90,
             thumbValues: [
-              { id: 1, color: '#ffffff', stop: 0 },
-              { id: 2, color: '#343434', stop: 100 },
+              { id: 1, color: '#ffffff', stop: 0, opacity: 1 },
+              { id: 2, color: '#343434', stop: 100, opacity: 1 },
             ],
-            position: `70% 70% / 250px 250px`,
+            position: {
+              x: '0',
+              unitX: 'px',
+              y: '0',
+              unitY: 'px',
+            },
+            size: {
+              x: '100',
+              unitX: '%',
+              y: '100',
+              unitY: '%',
+            },
           },
         ],
       }
@@ -164,7 +208,6 @@ let reducer = (state, action) => {
         ),
       }
     case 'UPDATE-OPACITY-VAL':
-      console.log('updating', action.payload)
       return {
         ...state,
         layers: state.layers.map((layer) =>
@@ -177,6 +220,36 @@ let reducer = (state, action) => {
                     ? tv
                     : { ...tv, opacity: action.payload.opacity }
                 ),
+              }
+        ),
+      }
+    case 'UPDATE-POSITION-VAL':
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id !== state.activeTab
+            ? layer
+            : {
+                ...layer,
+                position: {
+                  ...layer.position,
+                  ...action.payload,
+                },
+              }
+        ),
+      }
+    case 'UPDATE-SIZE-VAL':
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id !== state.activeTab
+            ? layer
+            : {
+                ...layer,
+                size: {
+                  ...layer.size,
+                  ...action.payload,
+                },
               }
         ),
       }

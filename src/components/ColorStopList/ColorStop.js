@@ -38,7 +38,6 @@ export default function ColorStop({ color, colorStopLength }) {
   }
 
   const handleOpacityChange = (e) => {
-    console.log(e.target.value)
     dispatch({
       type: 'UPDATE-OPACITY-VAL',
       payload: { colorid: color.id, opacity: parseFloat(e.target.value) },
