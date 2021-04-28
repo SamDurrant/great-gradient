@@ -18,6 +18,9 @@ function App() {
 
   return (
     <div className="App">
+      <header>
+        <h1>Great Gradient!</h1>
+      </header>
       <div className="tab-container">
         <Tabs />
         <Button solid text={'+'} onClick={addNewTab} className="tabs-btn" />

@@ -19,7 +19,7 @@ const StyledCheckbox = styled.input`
 const StyledDesign = styled.span`
   width: 16px;
   height: 16px;
-  border: 1px solid #242424;
+  border: 1px solid var(--color-dark);
   border-radius: 100%;
   margin-right: 16px;
   position: relative;
@@ -37,22 +37,22 @@ const StyledDesign = styled.span`
     transform-origin: center center;
   }
   &::before {
-    background: #242424;
+    background: var(--color-dark);
     opacity: 0;
     transition: 0.3s;
   }
   &::after {
-    background: #3d5a80;
+    background: var(--color-primary);
     opacity: 0.4;
     transition: 0.6s;
   }
 `
 
 const StyledLabelText = styled.span`
-  color: #242424;
+  color: var(--color-dark);
   font-weight: bold;
   ${StyledCheckbox}:hover & {
-    color: #3d5a80;
+    color: var(--color-primary);
   }
 `
 
@@ -67,13 +67,13 @@ const StyledLabel = styled.label`
 
   ${StyledCheckbox}:hover + ${StyledDesign},
   ${StyledCheckbox}:focus + ${StyledDesign} {
-    border: 1px solid #3d5a80;
+    border: 1px solid var(--color-primary);
 
     &::before {
-      background: #3d5a80;
+      background: var(--color-primary);
     }
     &::after {
-      background: #3d5a80;
+      background: var(--color-primary);
       opacity: 0.1;
       transform: scale(2.6);
     }
@@ -85,7 +85,7 @@ const StyledLabel = styled.label`
   }
 
   ${StyledCheckbox}:hover ~ ${StyledLabelText} {
-    color: #3d5a80;
+    color: var(--color-primary);
   }
 `
 

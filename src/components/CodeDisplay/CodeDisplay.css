@@ -4,8 +4,8 @@
 }
 
 .code-display {
-  background: #3d5a80;
-  color: #ededed;
+  background: var(--color-primary);
+  color: var(--color-light-soft);
   line-height: 1.3;
   padding: 2rem;
   margin-top: 0.5rem;

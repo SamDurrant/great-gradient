@@ -6,7 +6,7 @@ import InputWithLabel from '../InputWithLabel/InputWithLabel'
 import { setDragTarget, setDragInstance } from '../../utilities/animations'
 
 const StyledKnob = styled.div`
-  background: #3d5a80;
+  background: var(--color-primary);
   border-radius: 50%;
   width: 75px;
   height: 75px;
@@ -15,7 +15,7 @@ const StyledKnob = styled.div`
 const StyledNotch = styled.div`
   height: 50%;
   width: 3px;
-  background: #f8f9fa;
+  background: var(--color-light);
   margin: 0 auto;
 `
 

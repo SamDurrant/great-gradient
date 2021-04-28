@@ -5,7 +5,7 @@ import { GradientContext } from '../../context/GradientContext'
 import { createBgGradient } from '../../utilities/utility-fn'
 
 const StyledDisplay = styled.div`
-  border: 2px solid #3d5a80;
+  border: 2px solid var(--color-primary);
   width: 90%;
   height: 40vh;
   margin: 2rem auto;

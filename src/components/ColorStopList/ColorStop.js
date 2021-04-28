@@ -78,8 +78,8 @@ export default function ColorStop({ color, colorStopLength }) {
           max={1}
           step={0.1}
         />
+        <Button text="-" className="delete-btn" onClick={handleRemoveColor} />
       </div>
-      <Button text="-" className="delete-btn" onClick={handleRemoveColor} />
     </div>
   )
 }

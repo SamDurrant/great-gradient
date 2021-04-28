@@ -9,7 +9,7 @@ const StyledThumb = styled.div`
   border-radius: 3px;
   position: absolute;
   top: -5px;
-  border: 1px solid #242424;
+  border: 1px solid var(--color-dark);
   cursor: pointer;
 `
 
@@ -20,7 +20,8 @@ const ThumbLabel = styled.span`
   width: 30px;
   text-align: center;
   font-weight: bold;
-  color: #242424;
+  color: var(--color-dark);
+  background: var(--color-light);
   user-select: none;
 `
 

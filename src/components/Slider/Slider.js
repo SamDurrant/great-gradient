@@ -7,7 +7,7 @@ import { getPercent, getValue } from '../../utilities/utility-fn'
 const StyledSlider = styled.div`
   position: relative;
   border-radius: 3px;
-  background: #3d5a80;
+  background: var(--color-primary);
   height: 15px;
   width: 90%;
   margin: 0 auto 3rem;

@@ -5,9 +5,18 @@
   align-items: center;
   width: 100vw;
   min-height: 100vh;
-  padding: 2rem 0;
-  background: #f8f9fa;
-  color: #242424;
+  background: var(--color-light);
+  color: var(--color-dark);
+}
+
+header {
+  width: 90%;
+  color: var(--color-dark);
+  font-size: 0.6rem;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1rem 0 2rem;
 }
 
 .tab-container {
@@ -15,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #242424;
+  color: var(--color-dark);
 }
 
 .tabs-btn {

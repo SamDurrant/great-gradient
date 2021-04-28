@@ -11,8 +11,9 @@ const StyledUl = styled.ul`
 `
 
 const StyledTab = styled.li`
-  background: ${(props) => (props.active ? '#3d5a80' : 'none')};
-  color: ${(props) => (props.active ? '#f8f9fa' : '#242424')};
+  background: ${(props) => (props.active ? 'var(--color-primary)' : 'none')};
+  color: ${(props) =>
+    props.active ? 'var(--color-light)' : 'var(--color-dark)'};
   padding: 10px 20px;
   font-weight: bold;
   margin: 0 15px;

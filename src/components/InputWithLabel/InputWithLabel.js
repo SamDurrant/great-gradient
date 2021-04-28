@@ -16,7 +16,7 @@ const StyledWrapper = styled.div`
 
 const StyledLabel = styled.label`
   width: 4rem;
-  color: #242424;
+  color: var(--color-dark);
   display: block;
   letter-spacing: 1px;
   font-size: 0.8rem;
@@ -32,9 +32,11 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   width: 4rem;
   border: none;
-  border-bottom: 0.5px solid #3d5a80;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  border-bottom: 0.5px solid var(--color-primary);
   background: none;
-  color: #242424;
+  color: var(--color-dark);
   font-size: 1rem;
   text-align: center;
   padding: 2px 6px;
@@ -48,7 +50,7 @@ const StyledInput = styled.input`
   }
 
   &::placeholder {
-    color: #555;
+    color: var(--color-dark);
     letter-spacing: 1px;
   }
 
@@ -72,7 +74,7 @@ const StyledInput = styled.input`
   }
 
   &[type='color']::focus {
-    border-radius: none;
+    border-radius: 0;
   }
 
   &[type='checkbox'] {
@@ -82,7 +84,7 @@ const StyledInput = styled.input`
   }
 
   &[type='checkbox']::focus {
-    border-radius: none;
+    border-radius: 0;
   }
 `
 

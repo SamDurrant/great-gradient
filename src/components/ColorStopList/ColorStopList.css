@@ -12,20 +12,22 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  border: 1px solid #242424;
+  border: 1px solid var(--color-dark);
   border-radius: 3px;
 }
 
 .delete-btn {
-  position: absolute;
-  right: -15%;
-  background: #a30000;
-  color: #fff;
+  height: unset;
+  background: #ba1f33;
+  color: var(--color-light-soft);
+  align-self: stretch;
   font-weight: bold;
   font-size: 1rem;
-  padding: 3px 7px;
-  border-radius: 50%;
-  margin: 0.5rem;
+  border: none;
+  padding: 0;
+  margin: 5px;
+  width: 0px;
+  height: inherit;
   visibility: hidden;
   opacity: 0;
   transition: all 0.3s var(--base-ease);
@@ -34,4 +36,9 @@
 .with-btn:hover .delete-btn {
   visibility: visible;
   opacity: 1;
+  width: 22px;
+}
+
+.delete-btn:hover {
+  border: none;
 }

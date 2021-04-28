@@ -3,7 +3,7 @@
   border: 0.5px solid transparent;
   background: none;
   padding: 0.5rem 1rem;
-  color: #3d5a80;
+  color: var(--color-primary);
   font-size: 1rem;
   letter-spacing: 1px;
   font-weight: 500;
@@ -12,35 +12,35 @@
 }
 
 .Button:hover {
-  border: 0.5px solid #242424;
+  border: 0.5px solid var(--color-dark);
 }
 
 .Button:focus {
   border-radius: 5px;
   outline: none;
-  box-shadow: 0px 0px 4px 4px rgba(61, 90, 128, 0.7);
+  box-shadow: 0px 0px 4px 4px var(--color-primary-op);
 }
 
 .Button-solid {
-  background: #3d5a80;
-  color: #f8f9fa;
+  background: var(--color-primary);
+  color: var(--color-light);
   transition: all 0.3s var(--base-ease);
 }
 
 .Button-solid:hover {
-  background: #f8f9fa;
-  color: #242424;
+  background: var(--color-light);
+  color: var(--color-dark);
 }
 
 .Button-transparent {
-  background: #f8f9fa;
-  color: #242424;
+  background: var(--color-light);
+  color: var(--color-dark);
   font-weight: bold;
-  border: 0.5px solid #242424;
+  border: 0.5px solid var(--color-dark);
   transition: all 0.3s var(--base-ease);
 }
 
 .Button-transparent:hover {
-  background: #3d5a80;
-  color: #f8f9fa;
+  background: var(--color-primary);
+  color: var(--color-light);
 }
